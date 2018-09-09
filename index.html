@@ -11,13 +11,23 @@
 <script>
 
 var file_list = [];
+
+function parse_github_repository(url) {
+    return axios.get(url).then(resp => resp.data);
+}
+
 window.onload = function() {
-new Vue({
+var app = new Vue({
   el: "#app",
   data: {
     value: "value"
   }
 });
+  
+parse_github_repository("https://github.com/pkuwwt/reading_notes/").then((files) => {
+  app.value = files;
+});
+
 }
 </script>
 </body>
