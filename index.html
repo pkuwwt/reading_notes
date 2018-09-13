@@ -1,33 +1,64 @@
 
 <html>
 <head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <link href='css/fonts.css' rel="stylesheet">
+  <link href="css/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
-<body>
 
-<div id="app">{{value}}</div>
+<body>
+  <div id="app">
+    <v-app>
+      <v-toolbar app>
+        <v-toolbar-title>My Reading Notes</v-toolbar-title>
+      </v-toolbar>
+      <v-navigation-drawer app></v-navigation-drawer>
+      <v-content>
+        <v-container fluid>
+			{{text}}
+        </v-container>
+      </v-content>
+      <v-footer></v-footer>
+    </v-app>
+  </div>
+
+<script src="js/vue.min.js"></script>
+<script src="js/vuetify.js"></script>
+<script src="js/axios.min.js"></script>
 
 <script>
-
 var file_list = [];
 
-function parse_github_repository(url) {
-    return axios.get(url).then(resp => resp.data);
+function parse_file (file_path) {
+	return axios.get(file_path)
+		.then(resp => {
+			return {
+				filename: file_path,
+				content: resp.data
+			};
+		});
+}
+
+function parse_files (file_paths) {
+	return Promise.all(file_paths.map(parse_file));
+}
+
+function parse_json (json_file) {
+	return axios.get(json_file)
+		.then(resp => resp.data.files)
+		.then(files => parse_files(files));
 }
 
 window.onload = function() {
 var app = new Vue({
   el: "#app",
   data: {
-    value: "value"
+	  text: 'hello'
   }
 });
-  
-parse_github_repository("https://github.com/pkuwwt/reading_notes/").then((files) => {
-  app.value = files;
-});
-
+	parse_json('./files.json').then(files => {
+		app.text = files;
+	});
 }
 </script>
 </body>
