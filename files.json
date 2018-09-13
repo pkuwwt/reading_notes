@@ -1,7 +1,8 @@
 
 {
 	"files": [
-		"docs/cnn/arcface.md"
+		"docs/cnn/arcface.md",
+		"docs/gan/CycleGAN.md"
 	]
 }
 
