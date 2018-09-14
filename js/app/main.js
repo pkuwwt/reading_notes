@@ -1,5 +1,7 @@
 define(['vue', 'app/utils'], function(Vue, Utils) {
+	var name = 'Main';
 	var comp = Vue.extend({
+		name,
 		template: `
     <v-app>
       <v-toolbar app>
@@ -41,6 +43,6 @@ define(['vue', 'app/utils'], function(Vue, Utils) {
 			}
 		}
 	});
-	Vue.component("Main", comp);
-	return Vue.component("Main");
+	Vue.component(name, comp);
+	return Vue.component(name);
 });

@@ -2,7 +2,7 @@
 define(['vue'], function(Vue) {
   var name = MarkdownViewer;
   var comp = Vue.extend({
-    name: name,
+    name,
     template: ``,
     data () {
       return {};
