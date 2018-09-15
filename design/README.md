@@ -22,3 +22,8 @@ those dynamic workflows into old static templates.
 
 Moreover, as we can build a website from scratch, with a few javascript libraries and a text editor, 
 why we need other heavy 3rd-party dependencies?
+
+## Design documentation
+  * [Requirements](./requirements.md)
+  * [Overall design](./overall-design.md)
+  * [Detail design](./detail-design.md)
