@@ -13,16 +13,19 @@ requirejs(['vue', 'vuex.min', 'vuetify', 'app/utils'], function (Vue, vuex, vuet
 		el: "#app",
 		data: {
 			filename: '',
-	 		items: ['js/app/views/PathTree.js'],
+	 		items: [
+				'js/app/views/Tree.js',
+				'js/app/views/PathTree.js',
+			],
 		},
 		watch: {
 			filename (f) {
+				console.log(f);
 				var root = '../../';
 				try {
 					require([root+f], function(comp) {
 						var c = new comp();
-						console.log(c);
-						c.mount('#comp');
+						c.$mount('#comp');
 					})
 				} catch(e) {
 					console.error(e);
