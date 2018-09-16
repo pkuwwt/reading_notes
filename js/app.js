@@ -6,7 +6,7 @@ requirejs.config({
 	}
 });
 
-requirejs(['vue', 'vuex.min', 'vuetify', 'app/utils', 'js/app/main.js'], function (Vue, vuex, vuetify, Utils, main) {
+requirejs(['vue', 'vuex.min', 'vuetify', 'app/utils', 'app/main'], function (Vue, vuex, vuetify, Utils, main) {
 	Vue.use(vuex);
 	Vue.use(vuetify);
 	var app = new Vue({

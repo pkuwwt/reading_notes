@@ -1,16 +1,20 @@
-define(['vue', 'app/utils'], function(Vue, Utils) {
+
+define(['vue', 'app/utils', 'app/views/PathTree'], function(Vue, Utils, PathTree) {
 	var name = 'Main';
 	var comp = Vue.extend({
 		name,
+		components: {PathTree},
 		template: `
     <v-app>
       <v-toolbar app>
         <v-toolbar-title>My Reading Notes</v-toolbar-title>
 		<div style="margin-left:auto;width:40%">
-		<v-autocomplete autofocus v-model="filename" :items="items"></v-autocomplete>
+		<v-autocomplete autofocus v-model="filename" :items="filenames"></v-autocomplete>
 		</div>
       </v-toolbar>
-      <v-navigation-drawer app></v-navigation-drawer>
+      <v-navigation-drawer app>
+		<PathTree :files="filenames"></PathTree>
+	  </v-navigation-drawer>
       <v-content>
         <v-container fluid>
 			{{content}}
@@ -22,7 +26,7 @@ define(['vue', 'app/utils'], function(Vue, Utils) {
 		data() {
 			return {
 				filename: '',
-				items: ['abc', 'def'],
+				filenames: ['abc', 'def'],
 				files: {},
 			};
 		},
@@ -32,17 +36,20 @@ define(['vue', 'app/utils'], function(Vue, Utils) {
 				files.forEach(({filename,content}) => {
 					this.$set(this.files, filename, content);
 				});
-				this.items = files.map(f => f.filename);
-				this.filename = this.files[0].filename;
-				this.content = this.files[0].content
+				this.filenames = files.map(f => f.filename);
+				this.filename = this.filenames[0];
 			});
 		},
 		computed: {
 			content () {
 				return this.files[this.filename];
+			},
+			filenames () {
+				return Object.keys(this.files);
 			}
 		}
 	});
 	Vue.component(name, comp);
 	return Vue.component(name);
 });
+
