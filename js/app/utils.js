@@ -48,11 +48,45 @@ define(['axios.min'], function(axios) {
 	}
 	
 	function get_resource_same_origin(url) {
-		axios.get(url).then(resp => resp.data);
+		return axios.get(url).then(resp => resp.data);
 	}
-	
+	const promiseTimeout = function(ms, promise){
+
+  // Create a promise that rejects in <ms> milliseconds
+  let timeout = new Promise((resolve, reject) => {
+    let id = setTimeout(() => {
+      clearTimeout(id);
+      reject('Timed out in '+ ms + 'ms.')
+    }, ms)
+  })
+
+  // Returns a race between our timeout and the passed in promise
+  return Promise.race([
+    promise,
+    timeout
+  ])
+};
 	function get_resource_different_origin(url) {
 		var iframe = document.createElement('iframe');
+		iframe.src = url_origin(url);
+		return new Promise((resolve,reject) => {
+			var handler = event => {
+				window.removeEventListener("message", handler);
+				// TODO: Get Data
+				resolve(data);
+			};
+			var iframeHandler = function(event) {
+				var data = get_data(event);
+				var url = get_url(event);
+				axios.post(url, data).then(resp => resp.data).then(d => {
+					window.parent.postMessage();
+				});
+			};
+			window.addEventListener("message", handler);
+			iframe.addEventListener("message", iframeHandler);
+			iframe.contentWindow.postMessage('xxx', iframe.src);
+			
+		});
 		//TODO
 	}
 
