@@ -16,6 +16,7 @@ requirejs(['vue', 'vuex.min', 'vuetify', 'app/utils'], function (Vue, vuex, vuet
 	 		items: [
 				'js/app/views/Tree.js',
 				'js/app/views/PathTree.js',
+				'js/app/views/MarkdownViewer.js',
 			],
 		},
 		watch: {
