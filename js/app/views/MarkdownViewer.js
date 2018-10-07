@@ -1,6 +1,6 @@
 
 define(['vue', 'libs/vue-markdown'], function(Vue,VueMarkdown) {
-  var name = MarkdownViewer;
+  var name = 'MarkdownViewer';
   var comp = Vue.extend({
     name,
     props: ['markdown'],
