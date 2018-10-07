@@ -1,9 +1,9 @@
 
-define(['vue', 'app/utils', 'app/views/PathTree'], function(Vue, Utils, PathTree) {
+define(['vue', 'app/utils', 'app/views/PathTree', 'app/views/MarkdownViewer'], function(Vue, Utils, PathTree, MarkdownViewer) {
 	var name = 'Main';
 	var comp = Vue.extend({
 		name,
-		components: {PathTree},
+		components: {PathTree, MarkdownViewer},
 		template: `
     <v-app>
       <v-toolbar app>
@@ -17,7 +17,7 @@ define(['vue', 'app/utils', 'app/views/PathTree'], function(Vue, Utils, PathTree
 	  </v-navigation-drawer>
       <v-content>
         <v-container fluid>
-			{{content}}
+			<MarkdownViewer>{{content}}</MarkdownViewer>
         </v-container>
       </v-content>
       <v-footer></v-footer>
