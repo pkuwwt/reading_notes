@@ -1,5 +1,5 @@
 
-define(['vue', 'libs/vue-markdown'], function(Vue,VueMarkdown) {
+define(['vue'], function(Vue) {
   var name = 'MarkdownViewer';
   var comp = Vue.extend({
     name,
@@ -8,7 +8,6 @@ define(['vue', 'libs/vue-markdown'], function(Vue,VueMarkdown) {
       return {};
     },
     components: {
-      VueMarkdown,
     }
   });
   
