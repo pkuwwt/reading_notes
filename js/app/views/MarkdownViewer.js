@@ -4,11 +4,14 @@ define(['vue'], function(Vue) {
   var comp = Vue.extend({
     name,
     props: ['source'],
-    template: `<vue-markdown :source="source"><slot>$E=mc^2$</slot></vue-markdown>`,
+    template: `<vue-markdown :source="source"></vue-markdown>`,
     data () {
-      return {};
+      return {
+      };
     },
-    components: {
+	  methods: {
+	  },
+    computed: {
     }
   });
   

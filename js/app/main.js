@@ -18,7 +18,6 @@ define(['vue', 'app/utils', 'app/views/PathTree', 'app/views/MarkdownViewer'], f
       <v-content>
         <v-container fluid>
 			<MarkdownViewer :source="content"></MarkdownViewer>
-			<MarkdownViewer></MarkdownViewer>
         </v-container>
       </v-content>
       <v-footer></v-footer>
